@@ -5,6 +5,7 @@ open Swensen.Unquote.Assertions
 open marsRover
 
 [<Test>]
-let ``assert true is equals to true`` () = 
-    test <@ check = false @>
+let ``given a compass pointing to North when rotate to left orientation will be West`` () = 
+    let compass = Compass.North
+    test <@ compass.rotateLeft = Compass.West @>
 
