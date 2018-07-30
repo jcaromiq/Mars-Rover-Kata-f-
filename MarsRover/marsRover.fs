@@ -20,18 +20,19 @@ type Compass(orientation : orientation) =
     static member South = Compass(SOUTH)
 
     member this.rotateLeft = 
-        order 
+        let inv = order |> List.rev
+        inv
         |> List.findIndex(fun i -> i = orientation) 
-        |> (fun n -> n - 1) 
-        |> (fun n -> abs(n % order.Length))
-        |> (fun n -> order.Item(n))
+        |> (fun n -> n + 1) 
+        |> (fun n -> n % order.Length)
+        |> (fun n -> inv.Item(n))
         |> (fun n -> Compass(n))
 
     member this.rotateRight = 
         order 
         |> List.findIndex(fun i -> i = orientation) 
         |> (fun n -> n + 1) 
-        |> (fun n -> abs(n % order.Length))
+        |> (fun n -> n % order.Length)
         |> (fun n -> order.Item(n))
         |> (fun n -> Compass(n))
 
