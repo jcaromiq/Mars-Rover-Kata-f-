@@ -19,3 +19,9 @@ let ``given a compass pointing to North when rotate to right orientation will be
 let ``given a compass pointing to East when rotate to right orientation will be SOUTH`` () = 
     let compass = Compass.East
     test <@ compass.rotateRight = Compass.South @>
+
+
+[<Test>]
+let ``given a compass pointing to South when rotate to Left orientation will be East`` () = 
+    let compass = Compass.South
+    test <@ compass.rotateLeft = Compass.East @>
