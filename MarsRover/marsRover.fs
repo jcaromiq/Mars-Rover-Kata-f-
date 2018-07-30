@@ -7,7 +7,7 @@ type orientation =
     | SOUTH 
     | WEST
 
-let order = [orientation.NORTH; 
+let private cardinalPoints = [orientation.NORTH; 
     orientation.EAST;
     orientation.SOUTH;
     orientation.WEST]
@@ -20,21 +20,23 @@ type Compass(orientation : orientation) =
     static member South = Compass(SOUTH)
 
     member this.rotateLeft = 
-        let inv = order |> List.rev
-        inv
-        |> List.findIndex(fun i -> i = orientation) 
-        |> (fun n -> n + 1) 
-        |> (fun n -> n % order.Length)
-        |> (fun n -> inv.Item(n))
-        |> (fun n -> Compass(n))
+        cardinalPoints 
+        |> List.rev
+        |> this.rotate
 
     member this.rotateRight = 
-        order 
+        cardinalPoints
+        |> this.rotate
+
+    member private this.rotate(list) = 
+        list 
         |> List.findIndex(fun i -> i = orientation) 
         |> (fun n -> n + 1) 
-        |> (fun n -> n % order.Length)
-        |> (fun n -> order.Item(n))
+        |> (fun n -> n % list.Length)
+        |> (fun n -> list.Item(n))
         |> (fun n -> Compass(n))
+
+
 
     override x.ToString() = orientation.ToString()
     override x.GetHashCode() =
