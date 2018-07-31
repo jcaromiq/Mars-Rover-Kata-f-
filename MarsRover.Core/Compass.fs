@@ -32,12 +32,9 @@ module Compass =
         member private this.Rotate(list) = 
             list 
             |> List.findIndex(fun i -> i = orientation) 
-            |> (fun n -> n + 1) 
-            |> (fun n -> n % list.Length)
-            |> (fun n -> list.Item(n))
-            |> (fun n -> Compass(n))
-
-
+            |> (fun i -> (i + 1) % list.Length) 
+            |> (fun i -> list.Item(i))
+            |> (fun o -> Compass(o))
 
         override x.ToString() = orientation.ToString()
         override x.GetHashCode() =
