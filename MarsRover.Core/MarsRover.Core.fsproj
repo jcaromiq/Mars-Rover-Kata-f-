@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Include="Compass.fs" />
+    <Compile Include="Gps.fs" />
   </ItemGroup>
 
 </Project>
