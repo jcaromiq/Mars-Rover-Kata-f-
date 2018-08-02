@@ -5,22 +5,22 @@ open MarsRover.Core.Compass
 
 [<Tests>]
 let rotateLeftTests =
-  testList "Rotate to left from" [
-    testCase "North should orientate to West" <| fun () ->
-        let compass = Compass.North
-        Expect.equal compass.RotateLeft Compass.West "From North to left = West"
-    
-    testCase "South should orientate to East" <| fun () ->
-        let compass = Compass.South
-        Expect.equal compass.RotateLeft Compass.East "From South to left = East"
+    testList "Rotate to left from" [
+        testCase "North should orientate to West" <| fun () ->
+            let compass = Compass.North
+            Expect.equal compass.RotateLeft Compass.West "From North to left = West"
+        
+        testCase "South should orientate to East" <| fun () ->
+            let compass = Compass.South
+            Expect.equal compass.RotateLeft Compass.East "From South to left = East"
 
-    testCase "East should orientate to North" <| fun () ->
-        let compass = Compass.East
-        Expect.equal compass.RotateLeft Compass.North "From East to left = North"
+        testCase "East should orientate to North" <| fun () ->
+            let compass = Compass.East
+            Expect.equal compass.RotateLeft Compass.North "From East to left = North"
 
-    testCase "West should orientate to South" <| fun () ->
-        let compass = Compass.West
-        Expect.equal compass.RotateLeft Compass.South "From West to left = South"
+        testCase "West should orientate to South" <| fun () ->
+            let compass = Compass.West
+            Expect.equal compass.RotateLeft Compass.South "From West to left = South"
     ]
 
 [<Tests>]

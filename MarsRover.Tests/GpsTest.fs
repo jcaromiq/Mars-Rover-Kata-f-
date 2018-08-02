@@ -12,4 +12,11 @@ let moveOverXTest =
         let movement = create(1,0,Compass.East)
 
         Expect.equal gps.Forward movement "should increment x in one"
-    ]
+
+    testCase "when is oriented to EAST and go back" <| fun () ->
+        let gps = create(1,0,Compass.East)
+        let movement = create(0,0,Compass.East)
+
+        Expect.equal gps.Backward movement "should decrement x in one"
+
+  ]

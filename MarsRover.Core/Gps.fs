@@ -9,6 +9,7 @@ namespace MarsRover.Core
         type Position = {X:int; Y:int}
 
         let private incrementX position:Position = {X=position.X+1; Y=position.Y}
+        let private decrementX position:Position = {X=position.X-1; Y=position.Y}
 
                 
         type Gps (position:Position, compass:Compass) =
@@ -17,6 +18,8 @@ namespace MarsRover.Core
             member this.Compass = compass
 
             member this.Forward = new Gps(incrementX this.Position, compass=Compass.East)
+
+            member this.Backward = new Gps(decrementX this.Position, compass=Compass.East)
            
             override this.ToString() = this.Compass.ToString() + "{" + this.Position.ToString()  + "}"
         
