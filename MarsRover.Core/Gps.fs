@@ -4,16 +4,21 @@ namespace MarsRover.Core
     open System
 
     module Gps =
-    
-        type Gps (x:int, y: int, compass:Compass) =
-            member this.X = x
-            member this.Y = y
+        
+        [<StructuralEquality; StructuralComparison>]
+        type Position = {X:int; Y:int}
+
+        let private incrementX position:Position = {X=position.X+1; Y=position.Y}
+
+                
+        type Gps (position:Position, compass:Compass) =
+            member this.Position = position
 
             member this.Compass = compass
 
-            member this.Forward = new Gps(x= this.X+1, y=this.Y, compass=Compass.East)
+            member this.Forward = new Gps(incrementX this.Position, compass=Compass.East)
            
-            override this.ToString() = this.Compass.ToString() + "{" + this.X.ToString() + ", " + this.Y.ToString() + "}"
+            override this.ToString() = this.Compass.ToString() + "{" + this.Position.ToString()  + "}"
         
             override this.GetHashCode() = hash (this.ToString())
 
@@ -23,4 +28,4 @@ namespace MarsRover.Core
                 | _ -> false
         
         let create (X, Y, compass)= 
-             new Gps(x =X ,y = Y, compass =compass)
+             new Gps( {X=X; Y=Y}, compass=compass)
