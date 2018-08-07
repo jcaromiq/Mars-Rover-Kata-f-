@@ -2,7 +2,6 @@ namespace MarsRover.Core
 
 module Compass =
 
-    [<StructuralEquality; StructuralComparison>]
     type Orientation =
         | NORTH
         | EAST
@@ -11,12 +10,12 @@ module Compass =
     
     let private cardinalPoints = [ Orientation.NORTH; Orientation.EAST; Orientation.SOUTH; Orientation.WEST ]
     
-    type Compass(orientation : Orientation) =
-        member this.Orientation = orientation
-        static member North = Compass(NORTH)
-        static member West = Compass(WEST)
-        static member East = Compass(EAST)
-        static member South = Compass(SOUTH)
+    type Compass = {orientation : Orientation} with
+        
+        static member North = {orientation=NORTH}
+        static member West = {orientation=WEST}
+        static member East =  {orientation=EAST}
+        static member South = {orientation=SOUTH}
         
         member this.RotateLeft =
             cardinalPoints
@@ -27,16 +26,9 @@ module Compass =
         
         member private this.Rotate(list) =
             list
-            |> List.findIndex (fun i -> i = orientation)
+            |> List.findIndex (fun i -> i = this.orientation)
             |> (fun i -> (i + 1) % list.Length)
             |> (fun i -> list.Item(i))
-            |> (fun o -> Compass(o))
+            |> (fun o -> {orientation=o})
         
-        override x.ToString() = orientation.ToString()
-        
-        override x.GetHashCode() = hash (orientation)
-        
-        override x.Equals(b) =
-            match b with
-            | :? Compass as c -> (orientation) = (c.Orientation)
-            | _ -> false
+        override this.ToString() = this.orientation.ToString()

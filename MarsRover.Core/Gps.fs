@@ -4,37 +4,26 @@ open Compass
 open System
 
 module Gps =
-    [<StructuralEquality; StructuralComparison>]
+    
     type Position = { X : int; Y : int }
     
-    let private incrementX position : Position =
-        { X = position.X + 1
-          Y = position.Y }
-    
-    let private decrementX position : Position =
-        { X = position.X - 1
-          Y = position.Y }
-    
-    let private incrementY position : Position =
-        { X = position.X
-          Y = position.Y + 1 }
-    
-    let private decrementY position : Position =
-        { X = position.X
-          Y = position.Y - 1 }
-    
+    let private incrementX position : Position = {position with X=position.X+1}
+    let private decrementX position : Position = {position with X=position.X-1}
+    let private incrementY position : Position = {position with Y=position.Y+1}
+    let private decrementY position : Position = {position with Y=position.Y-1}
+      
     type Gps = {position : Position; compass : Compass} 
         with 
         
         member this.Forward =
-            match this.compass.Orientation with
+            match this.compass.orientation with
             | Orientation.EAST -> {this with position=(incrementX this.position)}
             | Orientation.WEST -> {this with position=(decrementX this.position)}
             | Orientation.NORTH -> {this with position=(incrementY this.position)}
             | Orientation.SOUTH -> {this with position=(decrementY this.position)}
         
         member this.Backward =
-            match this.compass.Orientation with
+            match this.compass.orientation with
             | Orientation.EAST -> {this with position=(decrementX this.position)}
             | Orientation.WEST -> {this with position=(incrementX this.position)}
             | Orientation.NORTH -> {this with position=(decrementY this.position)}
