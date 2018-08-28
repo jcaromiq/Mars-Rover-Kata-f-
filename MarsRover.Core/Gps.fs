@@ -12,9 +12,9 @@ module Gps =
     let private incrementY position : Position = {position with Y=position.Y+1}
     let private decrementY position : Position = {position with Y=position.Y-1}
       
-    type Gps = {position : Position; compass : Compass} 
-        with 
-        
+    type Gps = {position : Position; compass : Compass} with 
+        member this.TurnLeft = {this with compass=(this.compass.RotateLeft)}
+        member this.TurnRight = {this with compass=(this.compass.RotateRight)}
         member this.Forward =
             match this.compass.orientation with
             | Orientation.EAST -> {this with position=(incrementX this.position)}

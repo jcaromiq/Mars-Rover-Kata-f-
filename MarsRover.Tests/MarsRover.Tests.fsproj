@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Include="CompassTest.fs" />
     <Compile Include="GpsTest.fs" />
+    <Compile Include="RoverTest.fs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
     <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.*" />
+    <PackageReference Include="Expecto.VisualStudio.TestAdapter" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
